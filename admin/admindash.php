@@ -1,4 +1,29 @@
 <html>
+<?php	
+	include("connect.php");
+	if(isset($_REQUEST['logout'])){
+		$time=date("h:i:sa");
+		$sql="insert into Login_History('Logout_Time') values('$time');";
+		$res=mysql_query($sql);
+			
+		if($res){
+			echo "<script>alert('Sucessfully logged out');</script>";
+			session_destroy();
+		echo "<script>self.location='../welcome.php'</script>";
+		
+		}
+		else "Unsuccessful";
+		
+		if(isset($_REQUEST['logout'])){
+	
+		session_destroy();
+		echo "<script>self.location='../welcome.php'</script>";
+		
+		
+}
+}
+?>
+
 <head>
     <meta charset="UTF-8">
     <title>Admin DashBoard</title>
@@ -13,15 +38,18 @@
 	<div class = "wrapper">
 		<div class = "container">
 			<h1>Welcome Administrator! Select an operation</h1><br><br><br><br><br>
-			<form>
+			<form method="post">
 			<button type="button" id="addfaculty" onClick="location.href='addteacher.php'">Add Faculty</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<button type="button" id="addeval">Add Evaluation</button>	
+	<button type="button" id="addeval" onClick="location.href='../addeval.php'">Add Evaluation</button>	
 			<br><br><br><br>
 			<button type="button" id="Add Courses" onClick="location.href='course.php'">Add Courses</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<button type="button" id="report">Get Report</button>	
+	<button type="button" id="report">Get Report</button>	<br><br>
+			<center><button type="submit" name="logout" id="prevqp">Log Out</button></center>		
+		
 		</form>
+
 		</div>
 				
 	<ul class="bg-bubbles">

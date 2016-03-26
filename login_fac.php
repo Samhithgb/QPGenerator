@@ -15,13 +15,22 @@ $sql = "select * from Teacher where '$username'=Teacher_ID and '$password'=Passw
 $res = mysqli_query($con,$sql);
  
 $check = mysqli_fetch_array($res);
- 
+
 if(isset($check)){
+$date=date("Y/m/d");
+$time=date("h:i:sa");
+$type='Faculty';
+$sql2 = "insert into Login_History values('$date','$time','$username','$type')"	;
+mysqli_query($con,$sql2);
+
 echo 'success';
 $_SESSION['username']=$username;
+
 echo "<script>self.location='faculty/facultydash.php'</script>";
 }else{
-echo 'Failed';
+echo "<script>alert('Failed!');</script>";
+echo "<script>self.location='login_fac.html'</script>";
+
 }
  
 mysqli_close($con);

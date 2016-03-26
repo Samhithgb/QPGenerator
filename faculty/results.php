@@ -84,7 +84,7 @@ $query2="insert into Update_History values('$teacher','$cid','$id')";
 <br>
 <button type="submit" name="update">Update</button>
 <br><br>
-<button type="button" onClick="location.href='faculty/facultydash.php'">Go to dashboard</button>
+<button type="button" onClick="location.href='questdetails.php'">Go to Search</button>
 
 </form>
 

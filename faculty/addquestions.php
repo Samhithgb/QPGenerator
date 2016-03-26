@@ -63,14 +63,9 @@ session_start();
 			<input id="lod" name="LOD" type="number" placeholder="Level Of Difficulty" required>
 			<input id="uno" name="U_NO" type="number" placeholder="Unit Number" required>
 			
-
-
-
-
-
-
-			<button id="sub" type="submit" name="save" id="login-button">Proceed</button><br><br>
+     		<button id="sub" type="submit" name="save" id="login-button">Proceed</button><br><br>
 			<button id="sub" type="button" name="back" id="done-button" onClick="location.href='facultydash.php'">Go to Dashboard</button>
+			<button id="csv" type="button" name="csv"  id="csv-redirect" onClick="location.href='addfile.php'">Upload using a .csv file</button>
 		</form>
 	</div>
 	
