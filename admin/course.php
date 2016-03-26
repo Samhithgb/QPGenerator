@@ -1,0 +1,92 @@
+<html>
+<?php 
+
+
+include("connect.php");
+ if(isset($_REQUEST['save']))
+{
+    $sem=$_REQUEST['sem'];
+    $cid=$_REQUEST['ID'];
+    $nocre=$_REQUEST['noc'];
+    $type=$_REQUEST['type'];
+    $dept=$_REQUEST['deptID'];
+    $query="insert into Course(`Semester`,`Course_ID`,`Credits`,`Course_Tyoe`,`Dept_ID`)  
+    VALUES('$sem','$cid','$nocre','$type','$dept')";   
+    echo "<script>console.log('Registration...')</script>";
+    $res=mysql_query($query);
+   
+    echo "<script>alert('Registration Successful')</script>";
+    echo "<script>self.location='form.php'</script>";
+
+
+
+
+
+
+
+
+
+
+}
+
+?>
+<head>
+    <meta charset="UTF-8">
+    <title>Add Courses</title>
+    
+     
+    
+        <link rel="stylesheet" href="style.css">
+
+    
+    
+    
+  </head>
+
+  <body>
+	<script src="https://code.jquery.com/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+		<script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/jquery-ui.min.js"></script>
+		<script src="course.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
+    <div class="wrapper" id="wr">
+
+	<div class="container">
+		<br><br><br>
+		<h1>Add Courses to Database</h1>
+<br>
+		Hello Admin! Enter the Course and details to add it to question bank
+		<br><br><br>
+		<form class="form" id="form1" method="post" action="course.php">
+			<input name= "sem" id="semester" type="number" placeholder="Semester" required></textarea>
+			<input id="cid" name="ID" type="text" placeholder="ID (Ex:12IS64 or 12IS6B3)" required>
+			
+			<input id="noc" name="noc" type="number" placeholder="Number of Credits" required>
+		        <input id="type" name="type" type="text" placeholder="Elective/Mandatory?" required>
+				
+		          <input id="dept"name="deptID"type="text" placeholder="Department ID" required>
+			<button type="submit" id="sub" name= "save" id="login-button">Proceed</button>
+		</form>
+	</div>
+	
+	<ul class="bg-bubbles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+ 
+
+    
+    
+    
+  </body>
+</html>

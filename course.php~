@@ -1,0 +1,31 @@
+
+<?php 
+include("connect.php");
+ if(isset($_REQUEST['save']))
+{
+    $sem=test_sem($_REQUEST['sem']);
+    $cid=$_REQUEST['ID'];
+    $nocre=test_noc($_REQUEST['noc']);
+    $type=$_REQUEST['type'];
+    $dept=$_REQUEST['deptID'];
+    $query="insert into Course(`Semester`,`Course_ID`,`Credits`,`Course_Tyoe`,`Dept_ID`)  
+    VALUES('$sem','$cid','$nocre','$type','$dept')";   
+    echo "<script>console.log('Registration...')</script>";
+    $res=mysql_query($query);
+
+    echo "<script>alert('Registration Successful')</script>";
+    echo "<script>self.location='form.php'</script>";
+
+
+
+
+
+
+
+
+
+
+}
+
+?>
+
