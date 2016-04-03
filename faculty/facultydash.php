@@ -41,6 +41,17 @@ if(isset($_REQUEST['edit'])){
 }
 
 
+if(isset($_REQUEST['gen'])){
+	 
+if($_REQUEST['subject']){
+	    $_SESSION['subject']=$_REQUEST['subject'];
+		
+		 
+		echo "<script>self.location='selecteval.php'</script>";
+		}
+		else  "<script>alert('Select your subject!')</script>";
+}
+
 if(isset($_REQUEST['logout'])){
 	
 		session_destroy();
