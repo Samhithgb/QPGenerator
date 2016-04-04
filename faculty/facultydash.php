@@ -52,6 +52,19 @@ if($_REQUEST['subject']){
 		else  "<script>alert('Select your subject!')</script>";
 }
 
+
+
+if(isset($_REQUEST['syllabus'])){
+	 
+if($_REQUEST['subject']){
+	    $_SESSION['subject']=$_REQUEST['subject'];
+		
+		 
+		echo "<script>self.location='syllabus.php'</script>";
+		}
+		else  "<script>alert('Select your subject!')</script>";
+}
+
 if(isset($_REQUEST['logout'])){
 	
 		session_destroy();
@@ -94,6 +107,7 @@ if(isset($_REQUEST['logout'])){
 			<button type="submit" name="edit" id="EditQuestions">Edit Questions in Database</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<button type="submit" name="prev" id="prevqp">Refer Previous Papers</button><br><br>	
+	        <center><button type="submit" name="syllabus" id="syllabus">Check The Syllabus</button></center><br><br>	
 	<center><button type="submit" name="logout" id="prevqp">Log Out</button></center>		
 			
 					</form>

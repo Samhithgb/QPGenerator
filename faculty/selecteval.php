@@ -21,7 +21,7 @@ if(isset($_REQUEST['save'])){
 		$_SESSION['evaltype']=$_REQUEST['eval'];
 	    if($_REQUEST['eval']=='CIE')
 		echo "<script>self.location='ciedetails.html'</script>";
-		else echo "<script>self.location='qpgensee.php'</script>";
+		else echo "<script>self.location='qpgensee_updated.php'</script>";
 		
 	}
 	

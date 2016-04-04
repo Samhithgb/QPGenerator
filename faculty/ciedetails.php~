@@ -7,7 +7,9 @@ function pick_questions($mark,$y,$CID)
 {
 	echo "<script>console.log('Pick Here');</script>";
      $lim=0;
-    $query="SELECT Ques_ID,Marks,Description,Unit_No,Course_Id,LOD,CO FROM Questions WHERE Unit_No='$y' and Course_Id='$CID' and Marks<=2 ORDER BY RAND()";
+    
+
+     $query="SELECT Ques_ID,Marks,Description,Unit_No,Course_Id,LOD,CO FROM Questions WHERE Unit_No='$y' and Course_Id='$CID' and Marks<=2 ORDER BY RAND()";
      $res=mysql_query($query);
      if(!$res){
     die('Error'.mysql_error());

@@ -29,9 +29,7 @@
     <title>Admin DashBoard</title>
        
     <link rel="stylesheet" href="style.css">
-
-    
-    
+   
     
   </head>
 <body>
@@ -45,8 +43,11 @@
 			<br><br><br><br>
 			<button type="button" id="Add Courses" onClick="location.href='course.php'">Add Courses</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<button type="button" id="report">Get Report</button>	<br><br>
-			<center><button type="submit" name="logout" id="prevqp">Log Out</button></center>		
+	<button type="button" id="report">Get Report</button>	<br><br><br><br>
+			<button type="button" id="AssignTeacher" onClick="location.href='assignteacher.php'">Assign Teachers to Subject</button>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	
+			<button type="submit" name="logout" id="prevqp">Log Out</button>	
 		
 		</form>
 
