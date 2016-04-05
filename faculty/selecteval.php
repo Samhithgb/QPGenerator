@@ -3,14 +3,16 @@
 include("connect.php");
 session_start();
 $date=date("Y/m/d");
-$sql="select Eval_Start_Date,Eval_Type from  Evaluation where Eval_Start_Date > '$date'";
+$sql="select Eval_Start_Date,Eval_Type,Eval_ID from  Evaluation where Eval_Start_Date > '$date'";
 $result=mysql_query($sql);  
  $options="";   
  $i = 1;
   while ($row=mysql_fetch_array($result)) { 
     $f=$row["Eval_Start_Date"]; 
 	$k=$row["Eval_Type"];
-    $options.="<OPTION VALUE=\"$k\">".$f.' '.$k."</OPTION>"; 
+	$n=$row["Eval_ID"];
+	$type[$n]=$k;
+    $options.="<OPTION VALUE=\"$n\">".$f.' '.$k."</OPTION>"; 
     $i++;
   }
 
@@ -18,8 +20,9 @@ if(isset($_REQUEST['save'])){
 	
 	if(isset($_REQUEST['eval'])){
 		
-		$_SESSION['evaltype']=$_REQUEST['eval'];
-	    if($_REQUEST['eval']=='CIE')
+		$_SESSION['evaltype']=$type[$_REQUEST['eval']];
+		$_SESSION['eval']=$_REQUEST['eval'];
+	    if($type[$_REQUEST['eval']]=='CIE')
 		echo "<script>self.location='ciedetails.html'</script>";
 		else echo "<script>self.location='qpgensee_updated.php'</script>";
 		

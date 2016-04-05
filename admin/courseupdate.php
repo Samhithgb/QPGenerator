@@ -10,16 +10,14 @@ if(isset($_POST["submit"]))
 	$options='';
 	while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
 	{
-		$SID=$_SESSION['username'];
-		$QID=uniqid();
-		$co = $filesop[0];
-		$question = $filesop[1];
-		$desc=$filesop[2];
-		$lod=$filesop[3];
-		$U_No = $filesop[4];
-		$marks = $filesop[5];
-		$CID=$_SESSION['subject'];
-		$sql = mysql_query("INSERT INTO Questions VALUES ('$SID','$QID','$marks','$co','$question','$desc','$lod','$U_No','$CID')");
+		$CID=$filesop[0];
+		$sem = $filesop[1];
+		$credits=$filesop[2];
+		$ctype=$filesop[3];
+		$did=$filesop[4];
+		$cname = $filesop[5];
+		
+		$sql = mysql_query("INSERT INTO Course VALUES ('$sem','$CID','$credits','$ctype','$did','$cname')");
 	}
 	
 		if($sql){
@@ -53,11 +51,11 @@ if(isset($_POST["submit"]))
 	<div class="container">	
 		
 	Please make sure the file is a .csv file encoded in UTF-8 and English(US)
-	Columns : CO(in digits),Question,Remarks,Level of Difficulty,Unit_No (IN THE SAME ORDER).
+	Columns : Course ID,Semester,Credits,Course Type,Department ID,Course Name(IN THE SAME ORDER).
 <form name="import" method="post" enctype="multipart/form-data">
     	<input type="file" name="file" /><br />
         <button type="submit" name="submit" value="Submit">Upload</button>
-		<button type="button" onClick="location.href='addquestions.php'">Go Back</input>
+	<button type="button" onClick="location.href='course.php'">Go Back</input>
 </form>
 </div>
 	
