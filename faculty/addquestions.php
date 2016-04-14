@@ -1,6 +1,11 @@
 <?php 
+error_reporting(E_ALL);
+ini_set("display_errors",'1');
+    require 'aes.class.php';     // AES PHP implementation
+    require 'aesctr.class.php';  // AES Counter Mode implementation
 include("connect.php");
 session_start();
+
  if(isset($_REQUEST['save']))
 {
       
@@ -8,11 +13,13 @@ session_start();
     $QID=uniqid();
     $marks=$_REQUEST['marks'];
     $CO=$_REQUEST['CO'];
-    $Question=$_REQUEST['Question'];
+    $pw="password";
+    $Question= AesCtr::encrypt($_REQUEST['Question'], $pw, 256);
+   
     $description=$_REQUEST['description'];
     $LOD=$_REQUEST['LOD'];
     $U_NO=$_REQUEST['U_NO'];
-    $CID=$_SESSION['subject'];
+	$CID=$_SESSION['subject'];
     echo "<script>alert($CID)</script>";
     $query="insert into  Questions(`Teacher_ID`,`Ques_ID`,`Marks`,`CO`,`Description`,`Remarks`,`LOD`,`Unit_No`,`Course_Id`)  
     VALUES('$SID','$QID','$marks','$CO','$Question','$description','$LOD','$U_NO','$CID')";   

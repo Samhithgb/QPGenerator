@@ -1,6 +1,13 @@
 <?php 
+error_reporting(E_ALL);
+ini_set("display_errors",'1');
+    require 'aes.class.php';     // AES PHP implementation
+    require 'aesctr.class.php';  // AES Counter Mode implementation
 include("connect.php");
-session_start();
+session_start();error_reporting(E_ALL);
+ini_set("display_errors",'1');
+
+
  if(isset($_REQUEST['save']))
 {
       
@@ -8,12 +15,14 @@ session_start();
     $QID=uniqid();
     $marks=$_REQUEST['marks'];
     $CO=$_REQUEST['CO'];
-    $Question=$_REQUEST['Question'];
+    $pw="password";
+    $Question= AesCtr::encrypt($_REQUEST['Question'], $pw, 256);
+   
     $description=$_REQUEST['description'];
     $LOD=$_REQUEST['LOD'];
     $U_NO=$_REQUEST['U_NO'];
-    $CID=$_REQUEST['CID'];
-    
+	$CID=$_SESSION['subject'];
+    echo "<script>alert($CID)</script>";
     $query="insert into  Questions(`Teacher_ID`,`Ques_ID`,`Marks`,`CO`,`Description`,`Remarks`,`LOD`,`Unit_No`,`Course_Id`)  
     VALUES('$SID','$QID','$marks','$CO','$Question','$description','$LOD','$U_NO','$CID')";   
     $res=mysql_query($query);
@@ -62,15 +71,10 @@ session_start();
 			<input id="desc" name="description" type="text" placeholder="Brief Description" required>
 			<input id="lod" name="LOD" type="number" placeholder="Level Of Difficulty" required>
 			<input id="uno" name="U_NO" type="number" placeholder="Unit Number" required>
-			<input id="cid" name="CID" type="text" placeholder="Course ID" required>
-
-
-
-
-
-
-			<button id="sub" type="submit" name="save" id="login-button">Proceed</button><br><br>
+			
+     		<button id="sub" type="submit" name="save" id="login-button">Proceed</button><br><br>
 			<button id="sub" type="button" name="back" id="done-button" onClick="location.href='facultydash.php'">Go to Dashboard</button>
+			<button id="csv" type="button" name="csv"  id="csv-redirect" onClick="location.href='addfile.php'">Upload using a .csv file</button>
 		</form>
 	</div>
 	

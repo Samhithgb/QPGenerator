@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html >
 <?php
+
+error_reporting(E_ALL);
+ini_set("display_errors",'1');
+ini_set('include_path', '/var/www/html/admin/');
+require_once "recaptchalib.php";
+$secret = "6Lc0uxwTAAAAAAId2HHpRjlqOFuAX2WUdmPxJ34D";
+ 
+// empty response
+$response = null;
+ 
+// check secret key
+$reCaptcha = new ReCaptcha($secret);
+
+
+
+if ($_POST["g-recaptcha-response"]) {
+    $response = $reCaptcha->verifyResponse(
+        $_SERVER["REMOTE_ADDR"],
+        $_POST["g-recaptcha-response"]
+    );
+}
 define('HOST','localhost');
 define('USER','root');
 define('PASS','root');
@@ -17,7 +38,7 @@ $res = mysqli_query($con,$sql);
  
 $check = mysqli_fetch_array($res);
  
-if(isset($check)){
+if(isset($check) and $response != null && $response->success){
 $date=date("Y/m/d");
 $time=date("h:i:sa");
 $type='Admin';
@@ -45,7 +66,8 @@ mysqli_close($con);
     
         <link rel="stylesheet" href="style.css">
 
-    
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
     
     
   </head>
@@ -62,6 +84,8 @@ mysqli_close($con);
 		<form class="form" method="post">
 			<input type="text" name="uname" placeholder="Username" required>
 			<input type="password" name="password" placeholder="Password" required>
+			<center><div class="g-recaptcha" data-sitekey="6Lc0uxwTAAAAANEq6dzJODRmLwH4ubiYx4IRwgQY"></div>
+</center>
 			<button type="submit" id="login-button">Login</button>
 		</form>
 	</div>

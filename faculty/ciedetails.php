@@ -1,5 +1,6 @@
 <?php 
-
+  require 'aes.class.php';     // AES PHP implementation
+    require 'aesctr.class.php'; 
 include("connect.php");
 session_start();
 $table ='';
@@ -7,6 +8,7 @@ $l1=0;
 $l2=0;
 $l3=0;
 echo "
+
  <form><center>
      
       <button type='submit' name='sel' id='prevqp'>Select This Paper</button>	
@@ -15,7 +17,7 @@ echo "
 if(!isset($_SESSION['username'])){
   echo "<script>alert('Please login again');</script>";
   		echo "<script>self.location='../welcome.php'</script>";
-
+		
 }
 
 $sid=$_SESSION['username'];
@@ -54,6 +56,7 @@ if(isset($_REQUEST['sel'])){
 
 function pick_questions($mark,$y,$CID)
 {
+	$pw="password";
   global $table,$l1,$l2,$l3;
 	echo "<script>console.log('Pick Here');</script>";
      $lim=0;
@@ -67,7 +70,7 @@ function pick_questions($mark,$y,$CID)
 				if($row[1]==1){
          // printf ("Question: %s      Marks: %d    Unit: %d     LOD : %d",$row[2],$row[1],$row[3],$row[5]);
           $table.= "<tr><td style='width:1000px'>"; 
-         $table.= $row[2];
+         $table.= htmlspecialchars(AesCtr::decrypt($row[2], $pw, 256));
         $table.=  "</td><td>";   
            $table.=  $row[1];
         
@@ -98,8 +101,8 @@ function pick_questions($mark,$y,$CID)
                         }
           else if($lim<$mark){
          $table.=  "<tr><td style='width:1000px'>"; 
-         $table.=  $row[2];
-         $table.= "</td><td>";   
+         $table.=   htmlspecialchars(AesCtr::decrypt($row[2], $pw, 256));
+                  $table.= "</td><td>";   
           $table.=  $row[1];
        
          $table.=  "</td><td>";   
@@ -129,7 +132,7 @@ function pick_theory_questions($unit,$CID,$used_questions){
 global $table,$l1,$l2,$l3;
 $marks=0;
 $arr=array(6,8,5,10);
-
+$pw="password";
 
 $r=rand(0,3);    
 $i=0;
@@ -173,7 +176,7 @@ while($res = mysql_fetch_array($res1, MYSQL_BOTH) and $z<1){
 if(!(in_array($res[0],$used_questions))){
 $z++; 
  $table.=  "<tr><td style='width:1000px'>"; 
-          $table.=  $res[2];
+          $table.=   htmlspecialchars(AesCtr::decrypt($res[2], $pw, 256));
          $table.=  "</td ><td>";   
            $table.=  $res[1];
         
@@ -232,7 +235,7 @@ if(isset($_REQUEST['save']));
     $u5=$_REQUEST['unit_5']; 
     
   
-    
+    $pw="password";
   
    
 
@@ -385,7 +388,7 @@ $x++;
 
 }
 
-
+$pw="password";
 $table1=$table;
 $table=mysql_real_escape_string($table);
 $_SESSION['paper']=$table;
@@ -396,10 +399,11 @@ $_SESSION['l3']=$l3;
 echo $table1;
 
 
+require_once '/var/www/html/admin/phpdocx-trial-pro-5.5/classes/CreateDocx.inc';
+//$docx = new CreateDocx();
+//$docx->embedHTML($table1);
 
-
-
-
+//$docx->createDocxAndDownload('qp');
 
 
 

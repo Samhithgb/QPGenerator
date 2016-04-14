@@ -1,9 +1,13 @@
 <?php 
 include("connect.php");
 session_start();
-$table ='';
+
+require 'aes.class.php';     // AES PHP implementation
+require 'aesctr.class.php'; 
+$table ="<head><meta http-equiv='Content-type' content='text/html; charset=utf-8' /></head>";
 function pick_questions($mark,$y,$CID)
 {
+	$pw="password";
   global $table;
   echo "<script>console.log('Pick Here');</script>";
      $lim=0;
@@ -18,7 +22,7 @@ function pick_questions($mark,$y,$CID)
 	if($row[1]==1){
           //printf ("Question: %s      Marks: %d    Unit: %d     LOD : %d",$row[2],$row[1],$row[3],$row[5]);
          $table.= "<tr><td style='width:1000px'>"; 
-         $table.= $row[2];
+         $table.= htmlspecialchars(AesCtr::decrypt($row[2], $pw, 256));
          $table.=  "</td><td>";   
          $table.=  $row[1];
          $table.=  "</td><td>";   
@@ -34,7 +38,7 @@ function pick_questions($mark,$y,$CID)
        
           //printf ("Question: %s        Marks: %d         Unit: %d     LOD : %d",$row[2],$row[1],$row[3],$row[5]);
           $table.= "<tr><td style='width:1000px'>"; 
-          $table.= $row[2];
+          $table.= htmlspecialchars(AesCtr::decrypt($row[2], $pw, 256));
           $table.=  "</td><td>";   
           $table.=  $row[1];       
           $table.=  "</td><td>";   
@@ -54,7 +58,7 @@ global $table;
 $lim=16;$cum=0;
 $sel=rand(0,2);
 //$sel=1;
-$no=0;
+$no=0;$pw="password";
 switch($sel){
     
    case 0: 
@@ -95,7 +99,7 @@ if(!(in_array($r1[0],$used_questions))){
 $z++;    $q1=$r1[1];
 //printf ("Question: %s        Marks: %d     Unit: %d     LOD : %d",$r1[2],$r1[1],$r1[3],$r1[5]);
         $table.= "<tr><td style='width:1000px'>"; 
-        $table.= $r1[2];
+        $table.=htmlspecialchars(AesCtr::decrypt($r1[2], $pw, 256));
         $table.=  "</td><td>";   
         $table.=  $r1[1];        
         $table.=  "</td><td>";   
@@ -116,7 +120,7 @@ if(!(in_array($r2[0],$used_questions))){
 $z++;$q2=$r2[1];
 //printf ("Question: %s        Marks: %d     Unit: %d     LOD : %d",$r2[2],$r2[1],$r2[3],$r2[5]);
 $table.= "<tr><td style='width:1000px'>"; 
-         $table.= $r2[2];
+         $table.= htmlspecialchars(AesCtr::decrypt($r2[2], $pw, 256));
          $table.=  "</td><td>";   
          $table.=  $r2[1];       
          $table.=  "</td><td>";   
@@ -139,7 +143,7 @@ if(!(in_array($r3[0],$used_questions))){
 $z++;$q3=$r3[1];
 //printf ("Question: %s        Marks: %d     Unit: %d     LOD : %d",$r3[2],$r3[1],$r3[3],$r3[5]);
          $table.= "<tr><td style='width:1000px'>"; 
-         $table.= $r3[2];
+         $table.= htmlspecialchars(AesCtr::decrypt($r3[2], $pw, 256));
          $table.=  "</td><td>";   
          $table.=  $r3[1];        
          $table.=  "</td><td>";   

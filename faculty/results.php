@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <?php 
-session_start();
+error_reporting(E_ALL);
+ini_set("display_errors",'1');
+
+  require 'aes.class.php';     // AES PHP implementation
+    require 'aesctr.class.php';  // AES Counter Mode implementation
+
 include("connect.php");
 if(isset($_REQUEST['save'])){
 
 $unit = $_REQUEST['U_NO'];
 $marks= $_REQUEST['marks'];
-$keyword=$_REQUEST['KeyWords'];
-$cid=$_SESSION['subject'];
+//$keyword=$cipher->encrypt($key, $macKey,$_REQUEST['KeyWords']);
+$cid='12IS64';
 
-$result = mysql_query("SELECT * FROM Questions where Course_Id = '$cid' and Unit_No = $unit and Description LIKE '%$keyword%' and Marks>=$marks");
+$result = mysql_query("SELECT * FROM Questions where Course_Id = '$cid' and Unit_No = $unit and Marks>=$marks");
 if(!$result){
 	
 	 echo "<script>alert('No results found!')</script>";
@@ -29,34 +34,39 @@ echo "<center><table>
 $options='';
 while($row = mysql_fetch_array($result))
 {
+$pw="password";
 $f=$row['Ques_ID'];
 echo "<tr>";
 echo "<td>" . $row['Ques_ID'] . "</td>";
-echo "<td>" . $row['Description'] . "</td>";
+echo "<td>" . htmlspecialchars(AesCtr::decrypt($row['Description'], $pw, 256)) . "</td>";
+
 echo "<td>" . $row['Marks'] . "</td>";
 echo "</tr>";
 $options.="<OPTION VALUE=\"$f\">".$f."</OPTION>"; 
 }
 echo "</table></center>";
-mysqli_close($con);
+mysql_close($con);
 }
 
 
 if(isset($_REQUEST['update'])){
 	
 $id=$_REQUEST['updater'];
-$update=$_REQUEST['quest'];
-$teacher=$_SESSION['username'];
-$cid=$_SESSION['subject'];
+$pw="password";
+
+$update= AesCtr::encrypt($_REQUEST['quest'], $pw, 256);
+
+$teacher='Teacher';
+$cid='12IS64';
 
 
 $query="update Questions SET Description='$update' where Ques_ID = '$id'";
-$query2="insert into Update_History values('$teacher','$cid','$id')";
+//$query2="insert into Update_History values('$teacher','$cid','$id')";
 
  $res=mysql_query($query);
- $res2=mysql_query($query2);
+ //$res2=mysql_query($query2);
  
- if($res && $res2){
+ if($res){
     echo "<script>alert('Successfully updated the question')</script>";
     echo "<script>self.location='questdetails.php'</script>";
 	}

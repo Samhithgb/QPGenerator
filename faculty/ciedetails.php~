@@ -1,15 +1,66 @@
 <?php 
-
+  require 'aes.class.php';     // AES PHP implementation
+    require 'aesctr.class.php'; 
 include("connect.php");
 session_start();
+$table ='';
+$l1=0;
+$l2=0;
+$l3=0;
+echo "
+
+ <form><center>
+     
+      <button type='submit' name='sel' id='prevqp'>Select This Paper</button>	
+      </center></form>";
+
+if(!isset($_SESSION['username'])){
+  echo "<script>alert('Please login again');</script>";
+  		echo "<script>self.location='../welcome.php'</script>";
+		
+}
+
+$sid=$_SESSION['username'];
+$sub=$_SESSION['subject'];
+$eval=$_SESSION['eval'];
+
+if(isset($_REQUEST['sel'])){
+     
+     $qpid=uniqid();
+     $table3=$_SESSION['paper'];
+     $l1=$_SESSION['l1'];
+     $l2=$_SESSION['l2'];
+     $l3=$_SESSION['l3'];
+     $sql = "insert into Question_Paper values('$sid','$qpid','$sub','$eval','$table3',$l1,$l2,$l3); ";
+     $res=mysql_query($sql);
+     if(!$res){
+       echo "Error in transferring to admin!  Try Again. mysql_error()";
+     }
+     else{
+      echo "<script>alert('Successfully Submitted to the admin');</script>"; 
+  		echo "<script>self.location='facultydash.php'</script>";
+       
+     }
+  
+}
+
+
+
+
+
+
+
+
+
+
 
 function pick_questions($mark,$y,$CID)
 {
+	$pw="password";
+  global $table,$l1,$l2,$l3;
 	echo "<script>console.log('Pick Here');</script>";
      $lim=0;
-    
-
-     $query="SELECT Ques_ID,Marks,Description,Unit_No,Course_Id,LOD,CO FROM Questions WHERE Unit_No='$y' and Course_Id='$CID' and Marks<=2 ORDER BY RAND()";
+    $query="SELECT Ques_ID,Marks,Description,Unit_No,Course_Id,LOD,CO FROM Questions WHERE Unit_No='$y' and Course_Id='$CID' and Marks<=2 ORDER BY RAND()";
      $res=mysql_query($query);
      if(!$res){
     die('Error'.mysql_error());
@@ -18,17 +69,25 @@ function pick_questions($mark,$y,$CID)
      if(($mark-$lim)==1){
 				if($row[1]==1){
          // printf ("Question: %s      Marks: %d    Unit: %d     LOD : %d",$row[2],$row[1],$row[3],$row[5]);
-          echo "<tr><td style='width:1000px'>"; 
-          echo $row[2];
-         echo "</td><td>";   
-           echo $row[1];
+          $table.= "<tr><td style='width:1000px'>"; 
+         $table.= htmlspecialchars(AesCtr::decrypt($row[2], $pw, 256));
+        $table.=  "</td><td>";   
+           $table.=  $row[1];
         
-         echo "</td><td>";   
-           echo $row[5];
-         echo "</td><td>";   
-           echo $row[6];
-             echo "</td></tr>";
+         $table.=  "</td><td>";   
+           $table.=  $row[5];
+         $table.=  "</td><td>";   
+          $table.=  $row[6];
+            $table.=  "</td></tr>";
           
+    
+             
+             if($row[5]==1) $l1++;
+             else if($row[5]==2) $l2++;
+             else if($row[5]==3) $l3++;
+             else echo "Error";
+         //    var_dump($l1);         
+             
            
            
           
@@ -41,18 +100,26 @@ function pick_questions($mark,$y,$CID)
                           else continue;
                         }
           else if($lim<$mark){
-         echo "<tr><td style='width:1000px'>"; 
-          echo $row[2];
-         echo "</td><td>";   
-           echo $row[1];
+         $table.=  "<tr><td style='width:1000px'>"; 
+         $table.=   htmlspecialchars(AesCtr::decrypt($row[2], $pw, 256));
+                  $table.= "</td><td>";   
+          $table.=  $row[1];
        
-         echo "</td><td>";   
-           echo $row[5];
-         echo "</td><td>";   
-           echo $row[6];
-             echo "</td></tr>";
+         $table.=  "</td><td>";   
+           $table.= $row[5];
+         $table.=  "</td><td>";   
+           $table.= $row[6];
+             $table.= "</td></tr>";
           //printf ("Question: %s        Marks: %d         Unit: %d     LOD : %d",$row[2],$row[1],$row[3],$row[5]);
-         
+          switch($row[5]){
+             
+             case 1 : $l1++;break;
+             case 2 : $l2++;break;
+             case 3 : $l3++;break;
+             var_dump($l1);         
+                     
+             
+           }
           $lim=$lim+$row[1];}
          }
  
@@ -62,9 +129,10 @@ function pick_questions($mark,$y,$CID)
 
 
 function pick_theory_questions($unit,$CID,$used_questions){
+global $table,$l1,$l2,$l3;
 $marks=0;
 $arr=array(6,8,5,10);
-
+$pw="password";
 
 $r=rand(0,3);    
 $i=0;
@@ -107,16 +175,25 @@ while($res = mysql_fetch_array($res1, MYSQL_BOTH) and $z<1){
 
 if(!(in_array($res[0],$used_questions))){
 $z++; 
- echo "<tr><td style='width:1000px'>"; 
-          echo $res[2];
-         echo "</td ><td>";   
-           echo $res[1];
+ $table.=  "<tr><td style='width:1000px'>"; 
+          $table.=   htmlspecialchars(AesCtr::decrypt($res[2], $pw, 256));
+         $table.=  "</td ><td>";   
+           $table.=  $res[1];
         
-         echo "</td><td>";   
-           echo $res[5];
-         echo "</td><td>";   
-           echo $res[6];
-             echo "</td></tr>";
+         $table.=  "</td><td>";   
+           $table.=  $res[5];
+         $table.=  "</td><td>";   
+           $table.=  $res[6];
+             $table.=  "</td></tr>";
+              switch($res[5]){
+           
+             case 1 : $l1++;break;
+             case 2 : $l2++;break;
+             case 3 : $l3++;break;
+             var_dump($l1);         
+                echo "Inside";       
+             
+           }
 //printf ("Question: %s        Marks: %d     Unit: %d     LOD : %d",$res[2],$res[1],$res[3],$res[5]);
 
 array_push($used_questions,$res[0]);
@@ -158,7 +235,7 @@ if(isset($_REQUEST['save']));
     $u5=$_REQUEST['unit_5']; 
     
   
-    
+    $pw="password";
   
    
 
@@ -167,7 +244,10 @@ if(isset($_REQUEST['save']));
     $CID=$_SESSION['subject'];
      //printf("%s",$CID);
     $type="CIE";  
-
+    $CNAME = mysql_result(mysql_query("select Course_Name from Course where Course_ID='$CID'"),0);
+    if(!$CNAME || $CNAME==null){echo "<script>console.log('Error Retrieving Course Name');</script>";}
+    $sem = mysql_result(mysql_query("select Semester from Course where Course_ID='$CID'"),0);
+  
 $cnt[0]=0;
 $cnt[1]=0;
 $cnt[2]=0;
@@ -212,26 +292,30 @@ if($u5=="yes") {$cnt[5]++;$no_of_units++;$t[5]=$_REQUEST['tunit_5'];}
 
 
 
- echo "<center><table border='1' style='border-collapse: collapse;'>";
-          echo "<tr><td style='width:1000px'>";
-          echo "<center><strong>R V College of Engineering<br>Department of Information Science and Engineering<br>CIE Question Paper</center></strong>"; 
-          echo "</tr>";
-                  echo "<tr><td style='width:50px'>";  
+ $table.=  "<center><table border='1' style='border-collapse: collapse;'>";
+          $table.=  "<tr><td style='width:1115px'>";
+          $table.=  "<img src='logo.JPG'></img>";
+          $table.=  "<center><strong>R V College of Engineering<br>Department of Information Science and Engineering<br>CIE Question Paper</center></strong>"; 
+          $table.=  "</tr>";
+                  $table.=  "<tr><td style='width:1115px'>";
+                  $table.=  "<strong>Course : $CID  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; $CNAME  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Semester : $sem</strong>"; 
+                 $table.=  "</td></tr>";
+                 $table.=  "<tr><td style='width:1115px'><strong> Date : &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;No Of Hours : 2   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Staff : </tr> ";         
+                $table.=  "<tr><td style='width:1115px'><strong> Note :</strong> i) Answer all questions  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>Max Marks : 15 + 50</strong> <br> ii)Part A questions to be answered in first two pages of answer booklet.</td></tr>"; 
+                  //echo "Name : $CNAME";  
+                        
                  
- echo "</table>";
+ $table.=  "</table>";
 
-
-
-
-    
       
 
-echo "<center><strong>Part 1</strong></center>";
- echo "<center><table border='1' style='border-collapse: collapse;'>";
-    echo "<tr><th>Question</th><th>Marks</th><th>LOD</th><th>CO</th></tr>"; 
-    
+$table.=  "<br><center><strong>Part 1</strong></center><br>";
+ $table.=  "<center><table border='1' style='border-collapse: collapse;'>";
+    $table.=  "<tr><th>Question</th><th>Marks</th><th>LOD</th><th>CO</th></tr>"; 
+  
 while($x<=5){
-		echo "<script>console.log('Here1');</script>";
+ 
+		$table.=  "<script>console.log('Here1');</script>";
 			if($cnt[$x]==1)
 			{
 				if($te>1){
@@ -284,12 +368,12 @@ $x++;
 
 $used=array();
 
-echo "</table></center>";
-echo "<center><strong>Part 2</strong></center>";
+$table.=  "</table></center>";
+$table.=  "<br><center><strong>Part 2</strong></center><br><br>";
 $x=1;
 //printf("%d %d %d %d %d",$t[1],$t[2],$t[3],$t[4],$t[5]);
- echo "<center><table border='1' style='border-collapse: collapse;'>";
-    echo "<tr><th>Question</th><th>Marks</th><th>LOD</th><th>CO</th></tr>"; 
+ $table.= "<center><table border='1' style='border-collapse: collapse;'>";
+    $table.="<tr><th>Question</th><th>Marks</th><th>LOD</th><th>CO</th></tr>"; 
 while($x<=5){
 		//echo "<script>console.log('Inside while');</script>";
         while($t[$x]!=0){
@@ -298,22 +382,34 @@ while($x<=5){
             echo "<script>console.log('Called');</script>";
 	    
             $t[$x]--;
-        }
+        } 
 
 $x++;
 
 }
 
+$pw="password";
+$table1=$table;
+$table=mysql_real_escape_string($table);
+$_SESSION['paper']=$table;
+$_SESSION['l1']=$l1;
+$_SESSION['l2']=$l2;
+$_SESSION['l3']=$l3;
+ echo "<center>L1 Questions : $l1, L2 Questions : $l2, L3 Questions : $l3</center>";
+echo $table1;
 
 
+require_once '/var/www/html/admin/phpdocx-trial-pro-5.5/classes/CreateDocx.inc';
+//$docx = new CreateDocx();
+//$docx->embedHTML($table1);
 
-
-
-
-
+//$docx->createDocxAndDownload('qp');
 
 
 
 }
 
 ?>
+
+  
+ 
