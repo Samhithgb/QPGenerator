@@ -56,15 +56,16 @@ $pw="password";
 
 $update= AesCtr::encrypt($_REQUEST['quest'], $pw, 256);
 
-$teacher='Teacher';
+$teacher=$_SESSION['username'];
 $cid='12IS64';
+$date = date('Y/m/d H:i:s');
 
 
 $query="update Questions SET Description='$update' where Ques_ID = '$id'";
-//$query2="insert into Update_History values('$teacher','$cid','$id')";
+$query2="insert into Update_History values('$teacher','$cid','$id','$date')";
 
  $res=mysql_query($query);
- //$res2=mysql_query($query2);
+ $res2=mysql_query($query2);
  
  if($res){
     echo "<script>alert('Successfully updated the question')</script>";

@@ -7,7 +7,7 @@ if(isset($_SESSION['username'])){
   $username = $_SESSION['username'];
   $sql="select Course_ID from Handled_By where Teacher_ID='$username'"; 
   $result=mysql_query($sql); 
-
+   
   $options="";   
   $i = 1;
   while ($row=mysql_fetch_array($result)) { 

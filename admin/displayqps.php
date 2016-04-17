@@ -3,8 +3,7 @@
 session_start();
 error_reporting(E_ALL);
 ini_set("display_errors",'1');
-//ini_set('include_path', '/var/www/html/html/admin/jpgraph');
-
+ini_set('include_path', 'jpgraph');
 //require_once('src/jpgraph.php');  
 //require_once('src/jpgraph_bar.php');   
 include("connect.php");
@@ -32,6 +31,7 @@ echo "<center><table>
 <th>L1 Questions</th>
 <th>L2 Questions</th>
 <th>L3 Questions</th>
+
 </tr>";
 $options='';
 $width = 600; $height = 200;
@@ -41,28 +41,12 @@ $f=$row['QP_ID'];
 $l1=$row['L1'];
 $l2=$row['L2'];
 $l3=$row['L3'];
-//$xdata=array($l1,$l2,$l3);
-//$ydata=array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
-//$bplot = new BarPlot($xdata);   
-//$bplot2 = new BarPlot($ydata);   
-
 echo "<tr>";
 echo "<td>" . $row['S_ID'] . "</td>";
 echo "<td>" . $row['QP_ID'] . "</td>";
 echo "<td>" . $row['L1'] . "</td>";
 echo "<td>" . $row['L2'] . "</td>";
 echo "<td>" . $row['L3'] . "</td>";
-//$graph = new Graph($width,$height);
-//$graph->SetScale('intint');
-//$lineplot=new LinePlot($xdata);
-  // $graph->Add($lineplot);
-//$bplot->SetColor('darkgray');   
-//$bplot->SetWeight(1);   
-  
-// Adding bars to the praphic  
-//$graph->Add($bplot);  
-//$graph->Stroke();
-
 echo "</tr>";
 $options.="<OPTION VALUE=\"$f\">".$f."</OPTION>"; 
 }

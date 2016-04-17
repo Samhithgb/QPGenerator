@@ -22,7 +22,7 @@
 		
 }
 }
-
+ 
  if(isset($_REQUEST['syllabus'])){
 	 				 
 		echo "<script>self.location='updatesyllabus.php'</script>";
@@ -50,7 +50,7 @@
 			<br><br><br><br>
 			<button type="button" id="Add Courses" onClick="location.href='course.php'">Add Courses</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<button type="button" id="report">Get Report</button>	<br><br><br><br>
+	<button type="button" id="report" onClick="location.href='report.php'">Get Report</button>	<br><br><br><br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" id="AssignTeacher" onClick="location.href='assignteacher.php'">Assign Teachers to Subject</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button type="button" id="SelQP" onClick="location.href='selqp.php'">Select Question Papers</button>
