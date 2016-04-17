@@ -54,7 +54,7 @@ if($_REQUEST['subject']){
 
 
 	 
-if($_REQUEST['subject']){
+if($_REQUEST['syllabus']){
 	    $_SESSION['subject']=$_REQUEST['subject'];
 		
 		 
@@ -65,11 +65,23 @@ if($_REQUEST['subject']){
 
 if(isset($_REQUEST['logout'])){
 	
+	
 		session_destroy();
 		echo "<script>self.location='../welcome.php'</script>";
 		
 		
 }
+
+
+
+if(isset($_REQUEST['prev'])){
+	
+		 $_SESSION['subject']=$_REQUEST['subject'];
+		echo "<script>self.location='refqp.php'</script>";
+		
+		
+}
+
 
 ?>
 

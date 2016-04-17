@@ -2,13 +2,6 @@
 <?php 
 session_start();
 
-echo "<body>
-	<form method='post'>
-		<center><button type='submit' name='approve'>Approve Paper</button></center>
-			
-	</form>
-</body>
-</html>";
 $qpid=$_SESSION['qpaper'];
 $sub=$_SESSION['subject'];
 
@@ -16,14 +9,6 @@ $eval=$_SESSION['eval'];
 include("connect.php");
 require_once '/var/www/html/admin/phpdocx-trial-pro-5.5/classes/CreateDocx.inc';
 if(isset($_REQUEST['approve'])){
-
-$qp=$_SESSION['qp'];
-$qp=mysql_real_escape_string($qp);
-$sql = "insert into Prev_Qp values('$qpid','$eval','$sub','$qp')";
-$res=mysql_query($sql) or die(mysql_error());
-if(!res){
-		echo "<script>alert('Error!!');</script>";
-}
 $docx = new CreateDocx();
 $qp=$_SESSION['qp'];
 $docx->embedHTML($qp);
@@ -33,19 +18,16 @@ $docx->createDocxAndDownload('qp');
 if(isset($_REQUEST['display'])){
 $qpid=$_REQUEST['qps'];
 $_SESSION['qpaper']=$qpid;
-$query="Select Content,L1,L2,L3 from  Question_Paper where QP_ID='$qpid'";
+$query="Select Content from Prev_Qp where QP_ID='$qpid'";
 $res=mysql_query($query);
 if(!res){
 		echo "<script>alert('Question Paper Not Found!!');</script>";
 }
 else{
 $qp=mysql_result($res,0,'Content');
-$l1=mysql_result($res,0,'L1');
-$l2=mysql_result($res,0,'L2');
-$l3=mysql_result($res,0,'L3');
 
 $_SESSION['qp']=$qp;
-var_dump($l1);
+
 //$SESSION['l1q']=(int)$l1;
 //$SESSION['l2q']=(int)$l2;
 //$SESSION['l3q']=(int)$l3;
