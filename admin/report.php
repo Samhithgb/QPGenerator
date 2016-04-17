@@ -22,6 +22,7 @@
 				<button type="button" id="log" name="log" onClick="location.href='histrep.php'">Login/Update History</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button type="button" name="teach" id="teach" onClick="location.href='teachsub.php'">Subject-Teachers</button>
+			<br><br><center><button type="button" name="back" id="teach" onClick="location.href='admindash.php'">Back</button>
 	
 		
 		

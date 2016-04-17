@@ -7,7 +7,7 @@ $result = mysql_query("SELECT * FROM Handled_By");
 
 
 if(!$result){
-	
+	 
 	 echo "<script>alert('No results found!')</script>";
 	 echo "<script>self.location='report.php'</script>";
 }
