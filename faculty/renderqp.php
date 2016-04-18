@@ -4,16 +4,27 @@ session_start();
 
 $qpid=$_SESSION['qpaper'];
 $sub=$_SESSION['subject'];
-
+echo "<body>
+	<form method='post'>
+		<center><button type='submit' id='appr' name='approve'>Print this Paper</button></center>
+			
+	</form>
+</body>";
 $eval=$_SESSION['eval'];
 include("connect.php");
 require_once '/var/www/html/admin/phpdocx-trial-pro-5.5/classes/CreateDocx.inc';
 if(isset($_REQUEST['approve'])){
 $docx = new CreateDocx();
 $qp=$_SESSION['qp'];
-$docx->embedHTML($qp);
-//var_dump($qp);
-$docx->createDocxAndDownload('qp');
+print $qp;
+echo "
+ <script type='text/javascript'>
+        
+            var ButtonControl = document.getElementById('appr');
+            ButtonControl.style.visibility = 'hidden';
+            window.print();
+        
+    </script>";
 }
 if(isset($_REQUEST['display'])){
 $qpid=$_REQUEST['qps'];

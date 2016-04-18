@@ -4,7 +4,7 @@ session_start();
 
 echo "<body>
 	<form method='post'>
-		<center><button type='submit' name='approve'>Approve Paper</button></center>
+		<center><button type='submit' id='appr' name='approve'>Approve Paper</button></center>
 			
 	</form>
 </body>
@@ -18,17 +18,21 @@ require_once '/var/www/html/admin/phpdocx-trial-pro-5.5/classes/CreateDocx.inc';
 if(isset($_REQUEST['approve'])){
 
 $qp=$_SESSION['qp'];
+print $qp;
 $qp=mysql_real_escape_string($qp);
 $sql = "insert into Prev_Qp values('$qpid','$eval','$sub','$qp')";
 $res=mysql_query($sql) or die(mysql_error());
 if(!res){
 		echo "<script>alert('Error!!');</script>";
 }
-$docx = new CreateDocx();
-$qp=$_SESSION['qp'];
-$docx->embedHTML($qp);
-//var_dump($qp);
-$docx->createDocxAndDownload('qp');
+echo "
+ <script type='text/javascript'>
+        
+            var ButtonControl = document.getElementById('appr');
+            ButtonControl.style.visibility = 'hidden';
+            window.print();
+        
+    </script>";
 }
 if(isset($_REQUEST['display'])){
 $qpid=$_REQUEST['qps'];
