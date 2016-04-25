@@ -12,7 +12,7 @@ if(isset($_REQUEST['save'])){
 $unit = $_REQUEST['U_NO'];
 $marks= $_REQUEST['marks'];
 //$keyword=$cipher->encrypt($key, $macKey,$_REQUEST['KeyWords']);
-$cid='12IS64';
+$cid=$_SESSION['subject'];
 
 $result = mysql_query("SELECT * FROM Questions where Course_Id = '$cid' and Unit_No = $unit and Marks>=$marks");
 if(!$result){
@@ -57,7 +57,7 @@ $pw="password";
 $update= AesCtr::encrypt($_REQUEST['quest'], $pw, 256);
 
 $teacher=$_SESSION['username'];
-$cid='12IS64';
+$cid=$_SESSION['subject'];;
 $date = date('Y/m/d H:i:s');
 
 
