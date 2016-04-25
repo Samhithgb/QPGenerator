@@ -2,6 +2,13 @@
 include("connect.php");
 session_start();
 
+
+echo" <form><center>
+     
+      <button type='submit' name='sel' id='prevqp'>Select This Paper</button>	
+      </center></form>";
+
+
 require 'aes.class.php';     // AES PHP implementation
 require 'aesctr.class.php'; 
 $table ="<head><meta http-equiv='Content-type' content='text/html; charset=utf-8' /></head>";

@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 <?php 
 session_start();
-
+	session_cache_expire( 20 );
+$inactive = 10;
+if(isset($_SESSION['start']) ) {
+	$session_life = time() - $_SESSION['start'];
+	if($session_life > $inactive){
+		echo "<script>alert('Session Timeout! Please Login Again!');</script>";
+		echo "<script>self.location='../welcome.php'</script>";
+	}
+}
+$_SESSION['start'] = time();
+	
 echo "<body>
 	<form method='post'>
 		<center><button type='submit' id='appr' name='approve'>Approve Paper</button></center>

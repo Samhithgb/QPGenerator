@@ -8,6 +8,27 @@ if(isset($_REQUEST['save'])){
 echo "<script>alert('Starting..');</script>";
 $qun=array();
 $thun=array();
+	session_cache_expire( 20 );
+$inactive = 10;
+if(isset($_SESSION['start']) ) {
+	$session_life = time() - $_SESSION['start'];
+	if($session_life > $inactive){
+		echo "<script>alert('Session Timeout! Please Login Again!');</script>";
+		echo "<script>self.location='../welcome.php'</script>";
+	}
+}
+$_SESSION['start'] = time();
+	
+session_cache_expire( 20 );
+$inactive = 10;
+if(isset($_SESSION['start']) ) {
+	$session_life = time() - $_SESSION['start'];
+	if($session_life > $inactive){
+		echo "<script>alert('Session Timeout! Please Login Again!');</script>";
+		echo "<script>self.location='../welcome.php'</script>";
+	}
+}
+$_SESSION['start'] = time();
 
 /*
 $qun1=0;$qun2=0;$qun3=0;$qun4=0;$qun5=0;

@@ -3,6 +3,17 @@
 include("connect.php");
 session_start();
 
+session_cache_expire( 20 );
+$inactive = 10;
+if(isset($_SESSION['start']) ) {
+	$session_life = time() - $_SESSION['start'];
+	if($session_life > $inactive){
+		echo "<script>alert('Session Timeout! Please Login Again!');</script>";
+		echo "<script>self.location='../welcome.php'</script>";
+	}
+}
+$_SESSION['start'] = time();
+
 function pick_questions($y,$C,$maxx)
     {
            echo "<script>console.log('Entered Function');</script>";

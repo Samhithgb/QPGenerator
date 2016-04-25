@@ -2,7 +2,17 @@
 <?php 
 session_start();
 include("connect.php");
- 
+ 	session_cache_expire( 20 );
+$inactive = 10;
+if(isset($_SESSION['start']) ) {
+	$session_life = time() - $_SESSION['start'];
+	if($session_life > $inactive){
+		echo "<script>alert('Session Timeout! Please Login Again!');</script>";
+		echo "<script>self.location='../welcome.php'</script>";
+	}
+}
+$_SESSION['start'] = time();
+	
 if(isset($_REQUEST['update'])){
 	
 $newsyll=$_REQUEST['newsyllabus'];

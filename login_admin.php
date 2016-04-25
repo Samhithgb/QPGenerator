@@ -30,7 +30,7 @@ session_start();
 $con = mysqli_connect(HOST,USER,PASS,DB);
  
 $username = $_POST['uname'];
-$password = $_POST['password'];
+$password =md5($_POST['password']); 
  
 $sql = "select * from Admin where '$username'=Admin_ID and '$password'=Password";
  

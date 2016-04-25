@@ -2,7 +2,17 @@
 session_start();
 include("connect.php");
 $cid=$_SESSION['subject'];
-$cid='12IS64';
+	session_cache_expire( 20 );
+$inactive = 10;
+if(isset($_SESSION['start']) ) {
+	$session_life = time() - $_SESSION['start'];
+	if($session_life > $inactive){
+		echo "<script>alert('Session Timeout! Please Login Again!');</script>";
+		echo "<script>self.location='../welcome.php'</script>";
+	}
+}
+$_SESSION['start'] = time();
+	
 
 $result = mysql_query("SELECT * FROM Topics where Course_Id = '$cid' ");
 if(!$result){

@@ -1,6 +1,18 @@
 <html>
 <?php	
 	include("connect.php");
+	session_cache_expire( 20 );
+$inactive = 10;
+if(isset($_SESSION['start']) ) {
+	$session_life = time() - $_SESSION['start'];
+	if($session_life > $inactive){
+		echo "<script>alert('Session Timeout! Please Login Again!');</script>";
+		echo "<script>self.location='../welcome.php'</script>";
+	}
+}
+$_SESSION['start'] = time();
+	
+	
 	if(isset($_REQUEST['logout'])){
 		$time=date("h:i:sa");
 		$sql="insert into Login_History('Logout_Time') values('$time');";
@@ -22,6 +34,11 @@
 		
 }
 }
+  
+ if(isset($_REQUEST['addadmin'])){
+	 				 
+		echo "<script>self.location='addadmin.php'</script>";
+		}
  
  if(isset($_REQUEST['syllabus'])){
 	 				 
@@ -54,8 +71,10 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" id="AssignTeacher" onClick="location.href='assignteacher.php'">Assign Teachers to Subject</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button type="button" id="SelQP" onClick="location.href='selqp.php'">Select Question Papers</button>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
-		<button type="syllabus" name="syllabus" id="syll">Update Syllabus</button><br><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><br><br>
+		<button type="syllabus" name="syllabus" id="syll">Update Syllabus</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<button type="addadmin" name="addadmin" id="addadmin">Add Admin</button><br><br>
+		<br><br>
 			<button type="submit" name="logout" id="prevqp">Log Out</button>	
 		
 		</form>

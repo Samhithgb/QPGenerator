@@ -2,7 +2,17 @@
 <?php 
 
 include("connect.php");
-
+	session_cache_expire( 20 );
+$inactive = 10;
+if(isset($_SESSION['start']) ) {
+	$session_life = time() - $_SESSION['start'];
+	if($session_life > $inactive){
+		echo "<script>alert('Session Timeout! Please Login Again!');</script>";
+		echo "<script>self.location='../welcome.php'</script>";
+	}
+}
+$_SESSION['start'] = time();
+	
 echo "Update History";
 $result = mysql_query("SELECT * FROM Update_History");
 $result2 = mysql_query("SELECT * FROM Login_History");

@@ -2,6 +2,17 @@
 <?php 
 session_start();
 error_reporting(E_ALL);
+	session_cache_expire( 20 );
+$inactive = 10;
+if(isset($_SESSION['start']) ) {
+	$session_life = time() - $_SESSION['start'];
+	if($session_life > $inactive){
+		echo "<script>alert('Session Timeout! Please Login Again!');</script>";
+		echo "<script>self.location='../welcome.php'</script>";
+	}
+}
+$_SESSION['start'] = time();
+	
 ini_set("display_errors",'1');
 
     require 'aes.class.php';     // AES PHP implementation

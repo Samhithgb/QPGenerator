@@ -5,8 +5,20 @@ session_start();
 $date=date("Y/m/d");
 $sql="select Eval_Start_Date,Eval_Type,Eval_ID from  Evaluation where Eval_Start_Date > '$date'";
 $result=mysql_query($sql);  
- $options="";   
- $i = 1;
+$options="";   
+$i = 1;
+	session_cache_expire( 20 );
+$inactive = 10;
+if(isset($_SESSION['start']) ) {
+	$session_life = time() - $_SESSION['start'];
+	if($session_life > $inactive){
+		echo "<script>alert('Session Timeout! Please Login Again!');</script>";
+		echo "<script>self.location='../welcome.php'</script>";
+	}
+}
+$_SESSION['start'] = time();
+	
+
   while ($row=mysql_fetch_array($result)) { 
     $f=$row["Eval_Start_Date"]; 
 	$k=$row["Eval_Type"];

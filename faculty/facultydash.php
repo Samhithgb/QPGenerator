@@ -2,6 +2,18 @@
 <?php
 include("connect.php");
 session_start();
+session_cache_expire( 20 );
+$inactive = 10;
+if(isset($_SESSION['start']) ) {
+	$session_life = time() - $_SESSION['start'];
+	if($session_life > $inactive){
+		session_destroy();
+		echo "<script>alert('Session Timeout! Please Login Again!');</script>";
+		echo "<script>self.location='../welcome.php'</script>";
+	}
+}
+$_SESSION['start'] = time();
+
 if(isset($_SESSION['username'])){
   
   $username = $_SESSION['username'];
@@ -54,13 +66,13 @@ if($_REQUEST['subject']){
 
 
 	 
-if($_REQUEST['syllabus']){
+if(isset($_REQUEST['syllabus'])){
 	    $_SESSION['subject']=$_REQUEST['subject'];
 		
 		 
 		echo "<script>self.location='syllabus.php'</script>";
 		}
-		else  "<script>alert('Select your subject!')</script>";
+		
 
 
 if(isset($_REQUEST['logout'])){
