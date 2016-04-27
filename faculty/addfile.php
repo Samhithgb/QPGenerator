@@ -57,7 +57,11 @@ if(isset($_POST["submit"]))
     <meta charset="UTF-8">
     <title>Upload .csv</title>
     
-     
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
     
         <link rel="stylesheet" href="style.css">
 
@@ -70,7 +74,32 @@ if(isset($_POST["submit"]))
 	    <div class="wrapper" id="wr">
 
 	<div class="container">	
-		
+		<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand">Automatic QP Generator &nbsp   |  </a>
+    
+	
+    </div>
+	
+	  <a class="navbar-brand">Add Questions To Database &nbsp | &nbsp Add using .csv </a>
+	
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="facultydash.php">Logged in As     <?php echo $_SESSION["name"]; ?></a></li>
+       
+     
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
 	Please make sure the file is a .csv file encoded in UTF-8 and English(US)
 	Columns : CO(in digits),Question,Remarks,Level of Difficulty,Unit_No (IN THE SAME ORDER).
 <form name="import" method="post" enctype="multipart/form-data">

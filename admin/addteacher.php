@@ -2,8 +2,9 @@
 <html >
 
 <?php 
-error_reporting(E_ALL);
-ini_set("display_errors",'1');
+
+session_start();
+
 include("connect.php");
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
@@ -31,6 +32,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
   <head>
     <meta charset="UTF-8">
     <title>Faculty Details</title>    
+	 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="style.css">    
   </head>
 
@@ -38,8 +42,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
     <div class="wrapper">
 	<div class="container">
-		<h1>Automatic Question Paper Generator</h1>
-		<h2>Add Faculty Details</h2>
+		<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand">Automatic QP Generator &nbsp   |  </a>
+    
+	
+    </div>
+	
+	  <a class="navbar-brand" href='admindash.php'>Add new Faculty</a>
+	
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="admindash.php">Logged in As     <?php echo $_SESSION["username"]; ?></a></li>
+       
+     
+      </ul>
+    </div>
+  </div>
+</nav>
+		
+		<h4>Add Faculty Details</h4>
 		
 		<form class="form" action="" method="POST">
 			<input name="sid" type="text" placeholder="Staff ID" required>

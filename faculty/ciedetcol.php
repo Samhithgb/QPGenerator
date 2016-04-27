@@ -1,21 +1,48 @@
+
+
+
 <html >
   <head>
     <meta charset="UTF-8">
     <title>Question Paper Generation</title>
         
-        <link rel="stylesheet" href="style.css">
-    
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="style.css">
   </head>
 
   <body>
 	
     <div class="wrapper">
 	<div class="container">
-		<br>
-		<h1>Almost there! Enter Requirements</h1><br>
-		Please Submit your requirements
-                Question Paper will be generated based on your requirements
-		<br>
+        <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand">Automatic QP Generator &nbsp   |  </a>
+    
+	
+    </div>
+	
+	  <a class="navbar-brand" href='selecteval.php'>Generate Question Paper &nbsp   |  &nbspCIE - Select Units</a>
+	
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#lo">Logged in As     <?php session_start();echo $_SESSION["name"]; ?></a></li>
+       
+     
+      </ul>
+    </div>
+  </div>
+</nav>
+
+		
 	    <form class="form" method="post" action="ciedetails.php">
 	        Type "yes" against the unit number if that unit is included in the syllabus for the exam "no" otherwise.
             <br><br>

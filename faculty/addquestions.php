@@ -6,7 +6,7 @@ ini_set("display_errors",'1');
 include("connect.php");
 session_start();
 	session_cache_expire( 20 );
-$inactive = 10;
+$inactive = 1200;
 if(isset($_SESSION['start']) ) {
 	$session_life = time() - $_SESSION['start'];
 	if($session_life > $inactive){
@@ -49,13 +49,41 @@ $_SESSION['start'] = time();
   <head>
     <meta charset="UTF-8">
     <title>Add Questions</title>
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     
         <link rel="stylesheet" href="style.css">
     
   </head>
 
   <body>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand">Automatic QP Generator &nbsp   |  </a>
+    
+	
+    </div>
+	
+	  <a class="navbar-brand" href='facultydash.php'>Add Questions To Database</a>
+	
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="facultydash.php">Logged in As     <?php echo $_SESSION["name"]; ?></a></li>
+       
+     
+      </ul>
+    </div>
+  </div>
+</nav>
+
 
 <script src="https://code.jquery.com/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
 		<script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/jquery-ui.min.js"></script>
@@ -66,11 +94,9 @@ $_SESSION['start'] = time();
 	
     <div class="wrapper">
 	<div class="container">
-		<br><br><br>
-		<h1>Add Questions to Database</h1>
-<br>
-		Enter the question and details to add it to question bank
-		<br><br><br>
+		<br>
+		<h2>Enter the question and details to add it to question bank</h2>
+		<br>
 		<form method="POST">
 		
 			<input id="marks" name="marks" type="number" placeholder="Marks" required>

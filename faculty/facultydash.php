@@ -18,15 +18,32 @@ if(isset($_SESSION['username'])){
   
   $username = $_SESSION['username'];
   $sql="select Course_ID from Handled_By where Teacher_ID='$username'"; 
+  $sql2="select Designation,FName,MName,LName from Teacher where Teacher_ID='$username'";
   $result=mysql_query($sql); 
-   
-  $options="";   
+  $result2=mysql_query($sql2); 
+ 
+  $options="";
+  $options2="";   
+     
   $i = 1;
   while ($row=mysql_fetch_array($result)) { 
     $f=$row["Course_ID"]; 
     $options.="<OPTION VALUE=\"$f\">".$f."</OPTION>"; 
     $i++;
   }
+  
+  while ($row=mysql_fetch_array($result2)) { 
+    $f=$row["Designation"]; 
+	$k=$row["FName"];
+	$l=$row["MName"];
+	$m=$row["LName"];
+	$n=$row["Teacher_ID"];
+	
+    $options2.=$f.'.'.$k.' '.$l.' '.$m; 
+	$_SESSION['name']=$options2;
+    $i++;
+  }
+  
 }
 
 
@@ -103,17 +120,44 @@ if(isset($_REQUEST['prev'])){
 		
 	 <meta charset="UTF-8">
     <title>Hello Faculty!</title>
-      <link rel="stylesheet" href="style.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	  <link rel="stylesheet" href="style.css">
 </head>
 
 
 <body>
 	<div class = "wrapper">
 		<div class = "container">
-			
-			<br>
-			<h1>Welcome! What next?</h1>
-			<br><br><br>
+			<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand">Automatic QP Generator &nbsp   |  </a>
+    
+	
+    </div>
+	
+	  <a class="navbar-brand">Welcome Faculty!</a>
+	
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#lo">Logged in As     <?php echo $_SESSION["name"]; ?></a></li>
+       
+     
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+			<br><br>
 			<center>Select Subject </center>
 			<form method="post">
 			<select name="subject">
@@ -121,7 +165,7 @@ if(isset($_REQUEST['prev'])){
 							
 			</select>
 	
-			<br><br><br><br><br><br><br>
+			<br><br><br><br>
 			<button type="submit" name="add" id="addquestions">Add Questions</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<button type="submit" name="gen" id="generateqp">Generate Question Paper</button>	
@@ -130,7 +174,7 @@ if(isset($_REQUEST['prev'])){
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<button type="submit" name="prev" id="prevqp">Refer Previous Papers</button><br><br>	
 	        <center><button type="submit" name="syllabus" id="syllabus">Check The Syllabus</button></center><br><br>	
-	<center><button type="submit" name="logout" id="prevqp">Log Out</button></center>		
+	<center><button type="submit" name="logout" id="lo">Log Out</button></center>		
 			
 					</form>
 			

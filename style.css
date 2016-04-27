@@ -128,6 +128,9 @@ form input:focus {
   width: 300px;
   color:white;
 }
+footer { 
+    display: block;
+}
 form button {
   -webkit-appearance: none;
      -moz-appearance: none;

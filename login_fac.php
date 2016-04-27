@@ -53,7 +53,7 @@ $_SESSION['username']=$username;
 
 echo "<script>self.location='faculty/facultydash.php'</script>";
 }else{
-echo "<script>alert('Failed!');</script>";
+echo "<script>alert('Failed! Check your connectivity!');</script>";
 echo "<script>self.location='login_fac.html'</script>";
 
 }

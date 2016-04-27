@@ -24,7 +24,7 @@ if(!$result or $result==null){
 echo "<link rel='stylesheet' href='style.css'>";
 echo "<div class = 'wrapper'>
 		<div class = 'container'>";
-echo "<h2>Generated Question Papers for Evaluation :$eval</h2><br><br>";
+echo "<h2>Generated Question Papers for Subject :$subject</h2><br><br>";
 echo "<center><table border=1>
 <tr>
 <th>Question Paper ID</th>
@@ -57,13 +57,51 @@ mysql_close($con);
 
 
 ?>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Add Questions</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
+        <link rel="stylesheet" href="style.css">
+    
+  <body>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand">Automatic QP Generator &nbsp   |  </a>
+    
+	
+    </div>
+	
+	  <a class="navbar-brand" href='facultydash.php'>Refer Previous Papers</a>
+	
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="facultydash.php">Logged in As     <?php echo $_SESSION["name"]; ?></a></li>
+       
+     
+      </ul>
+    </div>
+  </div>
+</nav>
 
-<br><br>
 <h2>Choose the Question Paper ID to view</h2>
  
 <form method="post" action="renderqp.php">
 <SELECT name="qps">
 <?php echo($options);?>		
 </SELECT>
-<button type="submit" name="display">Display</button>
+<button type="submit" name="display">Display</button><br><br><center>
+<button type="button" name="display" onClick="location.href='facultydash.php'">Go to Dashboard</button>
 </form>
+</body>
+</html>

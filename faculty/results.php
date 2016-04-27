@@ -2,7 +2,7 @@
 <?php 
 error_reporting(E_ALL);
 ini_set("display_errors",'1');
-
+session_start();
   require 'aes.class.php';     // AES PHP implementation
     require 'aesctr.class.php';  // AES Counter Mode implementation
 
@@ -24,7 +24,7 @@ echo "<link rel='stylesheet' href='style.css'>";
 echo "<div class = 'wrapper'>
 		<div class = 'container'>";
 echo "<h2>Search Results</h2><br><br>";
-echo "<center><table>
+echo "<center><table border=1 >
 <tr>
 <th>Question ID</th>
 <th>Question</th>
@@ -83,7 +83,45 @@ $query2="insert into Update_History values('$teacher','$cid','$id','$date')";
 
 
 ?>
+  <head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
+        <link rel="stylesheet" href="style.css">
+    
+  </head>
+
+
 <br><br>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand">Automatic QP Generator &nbsp   |  </a>
+    
+	
+    </div>
+	
+	  <a class="navbar-brand" href='questdetails.php'>Edit Questions &nbsp | &nbsp Search Results </a>
+	
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="facultydash.php">Logged in As     <?php  echo $_SESSION["name"]; ?></a></li>
+       
+     
+      </ul>
+    </div>
+  </div>
+</nav>
+
 <h2>Choose the question to update:</h2>
  
 <form method="post">

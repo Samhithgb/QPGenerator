@@ -1,18 +1,43 @@
 <!DOCTYPE html>
-  <head>
+   <head>
     <meta charset="UTF-8">
-    <title>Enter Details of the question to edit</title>
-        
+    <title>Edit Questions</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     
         <link rel="stylesheet" href="style.css">
     
   </head>
-
-  <body>
 	  
 	  
 	    <div class="wrapper">
 	<div class="container">
+		<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand">Automatic QP Generator &nbsp   |  </a>
+    
+	
+    </div>
+	
+	  <a class="navbar-brand" href='facultydash.php'>Edit Questions in Database</a>
+	
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="facultydash.php">Logged in As     <?php session_start();echo $_SESSION["name"]; ?></a></li>
+       
+     
+      </ul>
+    </div>
+  </div>
+</nav>
 		<br><br><br>
 		<h1>Enter the details of the Question</h1>
 		<br> 

@@ -30,7 +30,11 @@ include("connect.php");
     
      
     
-        <link rel="stylesheet" href="style.css">
+         <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 
     
     
@@ -42,13 +46,34 @@ include("connect.php");
 		<script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/jquery-ui.min.js"></script>
 		<script src="course.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.0.0.js">
-$("#date").datepicker({ dateFormat: 'yy-dd-mm' });
-</script>
+
     <div class="wrapper" id="wr">
 <div class="container">
-		<br><br><br>
-		<h1>Add a new evaluation to Database</h1>
+	<nav class="navbar navbar-default navbar-fixed-top">		
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand">Automatic QP Generator &nbsp   |  </a>
+    
+	
+    </div>
+	
+	  <a class="navbar-brand" href='admin/admindash.php'>Add a new Evaluation</a>
+	
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="admindash.php">Logged in As     <?php echo $_SESSION["username"]; ?></a></li>
+       
+     
+      </ul>
+    </div>
+  </div>
+</nav>
+		
 <br>
 	<form id="form1" method="post">
 			<input name= "eval_date" id="date" placeholder="Start date(YYYY-MM-DD)" required>
@@ -81,10 +106,14 @@ $("#date").datepicker({ dateFormat: 'yy-dd-mm' });
 	</ul>
 </div>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
- 
+  <footer>
+  <p>Automatic QP Gen</p>
+  <p>By, Samhith G B and Pradeep V R. Copyright 2016</p>
+</footer>
 
     
     
     
   </body>
+ 
 </html>

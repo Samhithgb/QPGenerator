@@ -1,6 +1,6 @@
 <html>
 <?php 
-
+session_start();
 include("connect.php");
  if(isset($_REQUEST['save']))
 {
@@ -32,11 +32,15 @@ include("connect.php");
 <head>
     <meta charset="UTF-8">
     <title>Add Courses</title>
-    
+           <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+   
      
     
-        <link rel="stylesheet" href="style.css">
-
+      
     
     
     
@@ -51,11 +55,36 @@ include("connect.php");
     <div class="wrapper" id="wr">
 
 	<div class="container">
-		<br><br><br>
-		<h1>Add Courses to Database</h1>
+		
+		<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand">Automatic QP Generator &nbsp   |  </a>
+    
+	
+    </div>
+	
+	  <a class="navbar-brand" href='admindash.php'>Add Courses to Database</a>
+	
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="admindash.php">Logged in As     <?php echo $_SESSION["username"]; ?></a></li>
+       
+     
+      </ul>
+    </div>
+  </div>
+</nav>
+		<br>
+	
 <br>
-		Hello Admin! Enter the Course and details to add it to question bank
-		<br><br><br>
+	<h3> Enter the Course and details to add it to question bank<h3>
+		<br>
 		<form class="form" id="form1" method="post" action="course.php">
 			<input name= "sem" id="semester" type="number" placeholder="Semester" required></textarea>
 			<input id="cid" name="ID" type="text" placeholder="ID (Ex:12IS64 or 12IS6B3)" required>
