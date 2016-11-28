@@ -111,7 +111,10 @@
                     </div>
                     <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4">Admin login<i class="mdi-navigation-more-vert right"></i></span>
-                        <p><a href="login_admin.html">Login</a></p>
+                        <p><button class="btn waves-effect waves-light blue" type="button" id="addeval" onClick="location.href='login_admin.html'">Login
+    		
+ 			 </button>
+                            
                     </div>
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4">Admin login<i class="mdi-navigation-close right"></i></span>
@@ -127,7 +130,9 @@
                     </div>
                     <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4">Faculty login<i class="mdi-navigation-more-vert right"></i></span>
-                        <p><a href="login_fac.html">Login</a></p>
+                        <p>
+                            <button class="btn waves-effect waves-light blue" type="button" id="addeval" onClick="location.href='login_fac.html'">Login
+ 			 </button>
                     </div>
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4">Faculty login<i class="mdi-navigation-close right"></i></span>

@@ -109,12 +109,12 @@ if(isset($_SESSION['username'])){
       <div class="row">
                                        <img hspace="10" align="left" src="logo.png" width='50' height='50'>
 
-        <div class="col s6 offset-s4">
+        <div class="col s6 offset-s3">
          <a href="#" class="">Question Paper Generator :Admin Dashboard</a></div>
 
-<div col="col s4">
+<div  align="right" style:padding="20" col="col s4">
 
-         <a href="#" class="offset-s5">Hi, <?php echo $_SESSION["username"]; ?>
+         <a href="#" class="offset-s6">Hi, <?php echo $_SESSION["username"];    ?>&nbsp;&nbsp;&nbsp;&nbsp;
        </a>
 
        </div>
@@ -137,10 +137,12 @@ if(isset($_SESSION['username'])){
       </ul>
 
     </div>
-               
+            <div class="col s3 offset-s1 blue">
+<iframe align="right" src="http://free.timeanddate.com/clock/i5h7s9jw/n438/tlin/fn12/fs13/fcfff/tct/pct/ftb/tt0/tw1/tm1/ta1/tb4" frameborder="0" width="128" height="32" allowTransparency="true"></iframe>
+
+</div>   
     </div>
     
-    <iframe align="right" src="http://free.timeanddate.com/clock/i5h7s9jw/n438/tlin/fn12/fs13/fcaaa/tct/pct/ftb/tt0/tw1/tm1/ta1/tb4" frameborder="0" width="128" height="32" allowTransparency="true"></iframe>
 
 
 			<br><br>

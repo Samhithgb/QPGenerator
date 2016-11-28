@@ -167,8 +167,8 @@ if(isset($_REQUEST['prev'])){
         <div class="col s6 offset-s3">
 
          <a href="#" class="">Question Paper Generator :Faculty Dashboard</a></div>
-<div col="col s4">
-         <a href="#" class="offset-s5">Hi, <?php echo $_SESSION["name"]; ?>
+<div col="col s4" align='right'>
+         <a href="#" class="offset-s5">Hi, <?php echo $_SESSION["name"]; ?>&nbsp;&nbsp;
        </a>
        </div>
             
@@ -191,6 +191,7 @@ if(isset($_REQUEST['prev'])){
       </ul>
     </div>
     <div class="col s3 offset-s1 blue">
+<iframe align="right" src="http://free.timeanddate.com/clock/i5h7s9jw/n438/tlin/fn12/fs13/fcfff/tct/pct/ftb/tt0/tw1/tm1/ta1/tb4" frameborder="0" width="128" height="32" allowTransparency="true"></iframe>
 
 </div>
     </div>
@@ -198,7 +199,6 @@ if(isset($_REQUEST['prev'])){
     
 
 
-<iframe align="right" src="http://free.timeanddate.com/clock/i5h7s9jw/n438/tlin/fn12/fs13/fcaaa/tct/pct/ftb/tt0/tw1/tm1/ta1/tb4" frameborder="0" width="128" height="32" allowTransparency="true"></iframe>
 
 			<br><br>
  <div id="test1" class="col s12">      
